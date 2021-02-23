@@ -5,8 +5,15 @@ import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import FriendsList from "./components/FriendsList";
 import AddFriend from "./components/AddFriend";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 function App() {
+  const history = useHistory();
+  const logout = () => {
+    localStorage.removeItem("token");
+    history.push("/login");
+  };
+
   return (
     <div className="App">
       <nav>
@@ -18,6 +25,9 @@ function App() {
         </p>
         <p>
           <Link to="/add-friend">Add Friend</Link>
+        </p>
+        <p>
+          <Link onClick={logout}>Logout</Link>
         </p>
       </nav>
       <Switch>
